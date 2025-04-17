@@ -1,0 +1,57 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Next.js build output and cache
+/.next/
+/out/
+/.swc/
+
+# Testing
+/coverage
+.nyc_output
+
+# Production build artifacts
+/build
+/dist
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment Variables
+# Never commit .env files containing secrets!
+# Use .env.example as a template and add .env* to gitignore
+.env*
+!.env.example
+!.env.ci
+
+# Editor directories and files
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.sublime-workspace
+
+# macOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails cache files (Windows)
+Thumbs.db
+ehthumbs.db
+
+# Optional files
+.npm
+.eslintcache
+*.tsbuildinfo
