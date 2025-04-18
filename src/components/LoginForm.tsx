@@ -1,38 +1,27 @@
 "use client";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');  
+  const router = useRouter();
+  const [password, setPassword] = useState('');  
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    // 模擬API呼叫
-    try {
-      // 這裡可以實作實際登入邏輯
-      console.log('Login attempt with:', { email, password });
-      await new Promise(resolve => setTimeout(resolve, 1000)); // 模擬載入時間
-      
-      // 登入成功後可導向到儀表板
-      // router.push('/dashboard');
-    } catch (error) {
-      console.error('Login failed:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.push('/form');
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [router]);
 
   return (
-    <form className="space-y-8" onSubmit={handleSubmit}>
+    <form className="space-y-8">
       <div className="space-y-5">
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            電子郵件
+            電子郵件 (跳過此步驟)
           </label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -57,7 +46,7 @@ export default function LoginForm() {
 
         <div>
           <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            密碼
+            密碼(跳過此步驟)
           </label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -80,61 +69,7 @@ export default function LoginForm() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <input
-            id="remember-me"
-            name="remember-me"
-            type="checkbox"
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-          />
-          <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
-            記住我
-          </label>
-        </div>
-
-        <div className="text-sm">
-          <Link href="#" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
-            忘記密碼?
-          </Link>
-        </div>
-      </div>
-
-      <div>
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="btn-primary"
-        >
-          {isLoading ? (
-            <span className="flex items-center">
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              處理中...
-            </span>
-          ) : (
-            <span className="flex items-center justify-center">
-              <svg className="mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-              </svg>
-              登入
-            </span>
-          )}
-        </button>
-      </div>
-
-      <div className="flex items-center justify-center mt-6">
-        <div className="text-sm">
-          <p className="text-gray-600 dark:text-gray-400">
-            還沒有帳號?{' '}
-            <Link href="#" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 underline">
-              立即註冊
-            </Link>
-          </p>
-        </div>
-      </div>
+      
       
       {/* 社群媒體登入選項 */}
       <div className="mt-6">
@@ -173,3 +108,4 @@ export default function LoginForm() {
     </form>
   );
 }
+
